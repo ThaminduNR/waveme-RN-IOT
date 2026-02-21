@@ -1,0 +1,84 @@
+About Us
+Contact Us
+Services
+Delivery
+WhatsApp Order
+Payment Options
+Warranty
+Returns
+Testing
+FAQ
+Tracking
+TRONIC.LK
+Search...
+Home
+Products
+Categories 
+Brands 
+Shopping Cart
+Checkout
+ Optimus 1-Channel AC Dimmer Module 3.3/5VDC 230VAC (OP0135) Products
+Optimus 1-Channel AC Dimmer Module 3.3/5VDC 230VAC
+
+1
+Name	Optimus 1-Channel AC Dimmer Module 3.3/5VDC 230VAC
+Code	OP0135
+Price	Rs.1,200.00
+In Stock	Yes
+Package	MODULE
+Product Details
+The Optimus 1 Channel AC Dimmer Module is designed to control one Alternating Current (AC) load. , which can handle a maximum power up to 240VAC 5A . In most cases, the AC Dimmer is used for power ON/OFF of lamps or heating elements and can also be used in fans, pumps, air cleaners, etc.
+
+A microcontroller with 5V and 3.3V Logic Levels can be used to control the module. The RBDDimmer.h library is required if you are controlling using Arduino Development Boards.
+
+Features:
+
+Operating Voltage - 5V
+Built in Zero-Crossing Detector (ZCD) circuit for phase angle firing applications
+Maximum Power - 240VAC 5A (Recommended current - 3A continuous)
+Compatible with 3.3V and 5V Logic Level Development Boards
+Sharing is caring, show love and share the product with your friends.
+
+facebook
+twitter
+google+
+pinterest
+tumblr
+linkedin
+Whatsapp
+Featured 
+Rs.1,150.00
+2-Wheel Round Double Deck Smart Car Chassis Kit
+Robotics
+Rs.1,400.00
+NodeMCU ESP32 WiFi Bluetooth Dual Mode IoT Dev Board
+Communication Modules - NodeMCU
+Other Products
+Rs.6,750.00
+SPCE061A Voice Recognition Module for Arduino
+Miscellaneous Modules
+Rs.290.00
+GPD2846A TF Card MP3 Decoder Board Module
+Miscellaneous Modules
+Rs.740.00
+Data Logger Shield with SD card and RTC
+Miscellaneous Modules
+Rs.560.00
+ISD1820-II Sound Voice Board Recording and Playback Module with 8ohm 0.5W Speaker
+Miscellaneous Modules
+About us
+TRONIC.LK is an Electronic Store in Sri Lanka. Read more
+
+ 076 4485607 / 0112 199744  sales@tronic.lk
+
+Privacy Policy Terms & Conditions Contact us
+Payment methods
+We accept Bank Transfers, Credit/Debit Cards and QR Payments
+
+Payment Methods
+Follow us
+Please click the link below to follow us on social media.
+
+© 2026 TRONIC.LK. All rights reserved.          
+We use cookies to improve your experience on our website. By browsing this website, you agree to our use of cookies. Read more
+

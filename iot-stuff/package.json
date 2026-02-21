@@ -1,0 +1,15 @@
+{
+  "name": "iot-stuff",
+  "version": "1.0.0",
+  "main": "mqtt_relay_server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "mqtt": "^5.15.0"
+  }
+}

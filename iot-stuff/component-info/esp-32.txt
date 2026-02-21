@@ -1,0 +1,110 @@
+About Us
+Contact Us
+Services
+Delivery
+WhatsApp Order
+Payment Options
+Warranty
+Returns
+Testing
+FAQ
+Tracking
+TRONIC.LK
+Search...
+Home
+Products
+Categories 
+Brands 
+Shopping Cart
+Checkout
+ NodeMCU ESP32 WiFi Bluetooth Dual Mode IoT Dev Board Type C (MD0935) Products
+NodeMCU ESP32 WiFi Bluetooth Dual Mode IoT Dev Board Type C
+
+1
+Name	NodeMCU ESP32 WiFi Bluetooth Dual Mode IoT Dev Board Type C
+Code	MD0935
+Price	Rs.1,400.00
+In Stock	Yes
+Package	MODULE
+Product Details
+This NodeMCU-style ESP32 board features integrated Wi-Fi and Bluetooth, USB Type-C for modern connectivity, and a 30-pin layout including power and ground pins. It is ideal for wireless sensor networks, automation, and embedded IoT applications.
+
+Specifications
+
+Microcontroller: ESP32-WROOM-32 (Xtensa LX6 dual-core @ up to 240 MHz)
+Wireless:
+- Wi-Fi 802.11 b/g/n
+- Bluetooth v4.2 BR/EDR + BLE
+Flash Memory: 4 MB
+SRAM: 520 KB
+USB Interface: CP2102 USB-to-UART bridge
+USB Connector: USB Type-C
+GPIO: 30 pins total
+Operating Voltage: 3.3 V logic
+Power Input: 5 V via USB-C or VIN pin
+Current Consumption:
+- Active: ~160 mA
+- Deep Sleep: ~10 μA
+Buttons:
+- EN (reset)
+- IO0 (boot mode)
+Dimensions: ~58 mm × 28 mm
+Weight: ~8 g
+Programming Support: Arduino IDE, MicroPython, ESP-IDF
+OS Compatibility: Windows, Linux, macOS
+Features
+
+USB Type-C for reliable flashing and modern power input
+Dual-core processor with integrated Wi-Fi and Bluetooth
+30-pin layout including power and ground for breadboard use
+Ideal for IoT, automation, robotics, and wireless sensor networks
+Common use cases:
+- Smart home controllers and sensors
+- BLE/Wi-Fi bridges and gateways
+- Data loggers and remote monitoring nodes
+- Classroom and STEM embedded projects
+Sharing is caring, show love and share the product with your friends.
+
+facebook
+twitter
+google+
+pinterest
+tumblr
+linkedin
+Whatsapp
+Featured 
+Rs.4,300.00
+Arduino MEGA Normal Development Board with USB Cable
+Development Boards and Programmers - Arduino Compatibles
+Rs.1,800.00
+4 Wheel Smart Car Chassis kit
+Robotics
+Other Products
+Rs.1,150.00
+NodeMCU ESP32 CH340 WiFi Bluetooth Dual Mode IoT Dev Board Type C
+Communication Modules - NodeMCU
+Rs.900.00
+NodeMCU ESP8266 WiFi ESP-12E CP2101 IoT Dev Board Module
+Communication Modules - NodeMCU
+Rs.550.00
+NodeMCU ESP8266 Base Interface Testing DIY Board (for CH340 Version)
+Communication Modules - NodeMCU
+Rs.1,340.00
+NodeMCU ESP32 WiFi Bluetooth Dual Mode IoT Dev Board (38-Pin)
+Communication Modules - NodeMCU
+About us
+TRONIC.LK is an Electronic Store in Sri Lanka. Read more
+
+ 076 4485607 / 0112 199744  sales@tronic.lk
+
+Privacy Policy Terms & Conditions Contact us
+Payment methods
+We accept Bank Transfers, Credit/Debit Cards and QR Payments
+
+Payment Methods
+Follow us
+Please click the link below to follow us on social media.
+
+© 2026 TRONIC.LK. All rights reserved.          
+We use cookies to improve your experience on our website. By browsing this website, you agree to our use of cookies. Read more
+
