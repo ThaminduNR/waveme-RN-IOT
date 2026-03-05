@@ -22,7 +22,7 @@ import {
 } from 'react-native-safe-area-context';
 import MyCameraNativeComponent from './specs/MyCameraNativeComponent';
 
-const HTTP_RELAY_URL = 'http://192.168.1.187:3000';
+const HTTP_RELAY_URL = 'http://192.168.100.254:3000';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
