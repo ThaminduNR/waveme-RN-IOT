@@ -7,31 +7,31 @@ import Logon from '../assets/logo/logo.svg';
 import CommonButton from '../components/CommonButton';
 
 const WelcomeScreen = () => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.welcomeTextContainer}>
-        <Logon />
-        <WelcomeText />
-        <Text style={styles.welcomeText}>
-          At WaveMe, we believe in the power of gestures to transform the way you control lighting.
-        </Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <CommonButton
-          title="Sign Up"
-          variant="gradient"
-          onPress={() => navigation.navigate('Signup')}
-        />
-        <CommonButton
-          title="Sign in"
-          variant="outline"
-          onPress={() => navigation.navigate('Login')}
-        />
-      </View>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <View style={styles.welcomeTextContainer}>
+                <Logon />
+                <WelcomeText />
+                <Text style={styles.welcomeText}>
+                    At WaveMe, we believe in the power of gestures to transform the way you control lighting.
+                </Text>
+            </View>
+            <View style={styles.buttonContainer}>
+                <CommonButton
+                    title="Sign Up"
+                    variant="gradient"
+                    onPress={() => navigation.navigate('Signup')}
+                />
+                <CommonButton
+                    title="Sign in"
+                    variant="outline"
+                    onPress={() => navigation.navigate('Login')}
+                />
+            </View>
+        </View>
+    );
 };
 
 export default WelcomeScreen;

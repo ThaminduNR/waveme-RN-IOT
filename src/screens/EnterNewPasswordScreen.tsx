@@ -5,7 +5,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -14,19 +13,19 @@ import CommonHeader from '../components/CommonHeader';
 import CommonTextInput from '../components/TextInput';
 import CommonButton from '../components/CommonButton';
 
-const LoginScreen = () => {
+const EnterNewPasswordScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleContinue = () => {
-    // TODO: validate and submit login
-    navigation.navigate('Home');
-  };
-
-  const handleForgotPassword = () => {
-    // TODO: navigate to forgot password screen
-    navigation.navigate('ForgetPassword');
+    // TODO: validate passwords match and meet requirements
+    // TODO: submit new password to backend
+    // Then navigate to Login or Home
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    });
   };
 
   return (
@@ -44,35 +43,27 @@ const LoginScreen = () => {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
-          <Text style={styles.title}>Sign in</Text>
+          <Text style={styles.title}>New Password</Text>
           <Text style={styles.subtitle}>Welcome back to WaveMe</Text>
 
           <View style={styles.form}>
             <CommonTextInput
-              label="Email"
-              placeholder="Enter your email"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
+              label="Enter New Password"
+              placeholder="Enter new password"
+              value={newPassword}
+              onChangeText={setNewPassword}
+              secureTextEntry
             />
             <CommonTextInput
-              label="Password"
+              label="Re Enter New Password"
               placeholder="Enter your password"
-              value={password}
-              onChangeText={setPassword}
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
               secureTextEntry
             />
           </View>
 
-          <TouchableOpacity onPress={handleForgotPassword} style={styles.forgotWrap}>
-            <Text style={styles.forgotLink}>Forgot password?</Text>
-          </TouchableOpacity>
-
-          <View style={styles.separator}>
-            <View style={styles.line} />
-            {/* <Text style={styles.or}>or</Text> */}
-            <View style={styles.line} />
-          </View>
+          <View style={styles.spacer} />
 
           <View style={styles.buttonWrap}>
             <CommonButton title="Continue" variant="gradient" onPress={handleContinue} />
@@ -83,7 +74,7 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default EnterNewPasswordScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -101,7 +92,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   title: {
-    fontSize: 50,
+    fontSize: 28,
     fontWeight: '700',
     color: '#ffffff',
     marginBottom: 6,
@@ -112,35 +103,12 @@ const styles = StyleSheet.create({
     marginBottom: 28,
   },
   form: {
-    marginBottom: 8,
+    marginBottom: 16,
   },
-  forgotWrap: {
-    alignSelf: 'flex-start',
-    marginBottom: 24,
-  },
-  forgotLink: {
-    fontSize: 14,
-    color: '#b0a0c0',
-    textDecorationLine: 'underline',
-  },
-  separator: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 50,
-    marginTop: 50,
-  },
-  line: {
+  spacer: {
     flex: 1,
-    height: 1,
-    backgroundColor: '#333',
-  },
-  or: {
-    fontSize: 13,
-    color: '#8a8a8a',
-    marginHorizontal: 12,
   },
   buttonWrap: {
     alignItems: 'center',
-    marginTop: 80,
   },
 });

@@ -6,4 +6,7 @@ export type RootStackParamList = {
     Profile: undefined;
     Camera: undefined;
     Splash: undefined;
+    EnterNewPassword: undefined;
+    EnterCode: undefined;
+    ForgetPassword: undefined;
 };
