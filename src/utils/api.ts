@@ -4,6 +4,7 @@ import { getToken, removeToken } from './tokenStorage';
 
 const baseURL = API_BASE_URL ?? 'http://localhost:5000';
 
+console.log('baseURL', baseURL);
 /** Auth routes must not send a stale Bearer token (e.g. before login replaces it). */
 const PUBLIC_AUTH_PREFIXES = [
   '/api/auth/login',

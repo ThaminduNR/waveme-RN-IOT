@@ -33,9 +33,12 @@ const LoginScreen = () => {
     }
     setLoading(true);
     try {
+      console.log('email', email.trim());
+      console.log('password', password);
       await login({ email: email.trim(), password });
       navigation.navigate('Home');
     } catch (e) {
+      console.log('Login response error', e);
       Alert.alert('Sign in failed', getErrorMessage(e));
     } finally {
       setLoading(false);

@@ -37,8 +37,11 @@ export async function register(payload: RegisterPayload): Promise<void> {
 }
 
 export async function login(payload: LoginPayload): Promise<void> {
+  console.log('login payload', payload);
   const { data } = await api.post<unknown>('/api/auth/login', payload);
+  console.log('login data', data);
   const token = extractToken(data);
+ 
   if (!token) {
     throw new Error('No token received from server');
   }
