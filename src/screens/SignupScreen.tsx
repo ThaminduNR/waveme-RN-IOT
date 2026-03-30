@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -12,16 +13,37 @@ import { RootStackParamList } from '../navigation/RootStackParamList';
 import CommonHeader from '../components/CommonHeader';
 import CommonTextInput from '../components/TextInput';
 import CommonButton from '../components/CommonButton';
+import { register } from '../services/authService';
+import { getErrorMessage } from '../utils/apiError';
 
 const SignupScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleContinue = () => {
-    // TODO: validate and submit
-    navigation.navigate('Login');
+  const handleContinue = async () => {
+    if (!name.trim() || !email.trim() || !password) {
+      Alert.alert('Missing fields', 'Please fill in name, email, and password.');
+      return;
+    }
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    try {
+      await register({
+        name: name.trim(),
+        email: email.trim(),
+        password,
+      });
+      navigation.navigate('Home');
+    } catch (e) {
+      Alert.alert('Sign up failed', getErrorMessage(e));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,7 +98,11 @@ const SignupScreen = () => {
           </View>
 
           <View style={styles.buttonWrap}>
-            <CommonButton title="Continue" variant="gradient" onPress={handleContinue} />
+            <CommonButton
+              title={loading ? 'Creating account…' : 'Continue'}
+              variant="gradient"
+              onPress={handleContinue}
+            />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

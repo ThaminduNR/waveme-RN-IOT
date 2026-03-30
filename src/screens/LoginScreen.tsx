@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -13,15 +14,32 @@ import { RootStackParamList } from '../navigation/RootStackParamList';
 import CommonHeader from '../components/CommonHeader';
 import CommonTextInput from '../components/TextInput';
 import CommonButton from '../components/CommonButton';
+import { login } from '../services/authService';
+import { getErrorMessage } from '../utils/apiError';
 
 const LoginScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleContinue = () => {
-    // TODO: validate and submit login
-    navigation.navigate('Home');
+  const handleContinue = async () => {
+    if (!email.trim() || !password) {
+      Alert.alert('Missing fields', 'Please enter email and password.');
+      return;
+    }
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    try {
+      await login({ email: email.trim(), password });
+      navigation.navigate('Home');
+    } catch (e) {
+      Alert.alert('Sign in failed', getErrorMessage(e));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleForgotPassword = () => {
@@ -75,7 +93,11 @@ const LoginScreen = () => {
           </View>
 
           <View style={styles.buttonWrap}>
-            <CommonButton title="Continue" variant="gradient" onPress={handleContinue} />
+            <CommonButton
+              title={loading ? 'Signing in…' : 'Continue'}
+              variant="gradient"
+              onPress={handleContinue}
+            />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

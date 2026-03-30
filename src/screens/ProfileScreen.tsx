@@ -13,29 +13,46 @@ import { RootStackParamList } from '../navigation/RootStackParamList';
 import CommonHeader from '../components/CommonHeader';
 import CommonButton from '../components/CommonButton';
 import UserIcon from '../assets/icons/User.svg';
+import { useUserProfile } from '../hooks/useUserProfile';
+import { removeToken } from '../utils/tokenStorage';
 import MailIcon from '../assets/icons/Mail.svg';
 import LockIcon from '../assets/icons/Lock.svg';
 
 const AVATAR_SIZE = 100;
 const RING_STROKE = 3;
 
+function initialsFromName(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length >= 2) {
+    return `${parts[0][0] ?? ''}${parts[1][0] ?? ''}`.toUpperCase();
+  }
+  if (parts.length === 1 && parts[0].length >= 2) {
+    return parts[0].slice(0, 2).toUpperCase();
+  }
+  return parts[0]?.slice(0, 1).toUpperCase() ?? '?';
+}
+
 const ProfileScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { width } = useWindowDimensions();
   const contentWidth = width - 48;
+  const { user } = useUserProfile();
+
+  const displayName = user?.name?.trim() || '—';
+  const displayEmail = user?.email?.trim() || '—';
 
   const infoRows = [
     {
       icon: UserIcon,
       iconBg: '#BE25E2',
       label: 'Name',
-      value: 'Johnson Smith',
+      value: displayName,
     },
     {
       icon: MailIcon,
       iconBg: '#E91E63',
       label: 'Email',
-      value: 'johnson.smith@email.com',
+      value: displayEmail,
     },
 
   ];
@@ -53,7 +70,9 @@ const ProfileScreen = () => {
         {/* Profile avatar with gradient ring */}
         <View style={styles.avatarWrap}>
           <View style={styles.avatarInner}>
-            <Text style={styles.avatarPlaceholder}>JS</Text>
+            <Text style={styles.avatarPlaceholder}>
+              {user?.name ? initialsFromName(user.name) : '—'}
+            </Text>
           </View>
           <Svg
             style={StyleSheet.absoluteFill}
@@ -77,7 +96,7 @@ const ProfileScreen = () => {
           </Svg>
         </View>
 
-        <Text style={styles.userName}>Johnson Smith</Text>
+        <Text style={styles.userName}>{displayName}</Text>
         <Text style={styles.memberSince}>Member since March 2026</Text>
 
         {/* Info cards */}
@@ -104,7 +123,10 @@ const ProfileScreen = () => {
           <TouchableOpacity
             style={[styles.signOutButton, { width: contentWidth }]}
             activeOpacity={0.8}
-            onPress={() => navigation.reset({ index: 0, routes: [{ name: 'Welcome' }] })}
+            onPress={async () => {
+              await removeToken();
+              navigation.reset({ index: 0, routes: [{ name: 'Welcome' }] });
+            }}
           >
             <Text style={styles.signOutText}>Sign Out</Text>
           </TouchableOpacity>

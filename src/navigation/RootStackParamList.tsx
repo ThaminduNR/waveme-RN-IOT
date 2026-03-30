@@ -6,7 +6,7 @@ export type RootStackParamList = {
     Profile: undefined;
     Camera: undefined;
     Splash: undefined;
-    EnterNewPassword: undefined;
-    EnterCode: undefined;
+    EnterNewPassword: { email: string; code: string };
+    EnterCode: { email: string };
     ForgetPassword: undefined;
 };

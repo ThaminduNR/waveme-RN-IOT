@@ -15,8 +15,16 @@ import CameraIcon from '../assets/icons/Camera.svg';
 import ListIcon from '../assets/icons/List.svg';
 import SettingsIcon from '../assets/icons/Settings.svg';
 import UserIcon from '../assets/icons/User.svg';
+import { useUserProfile } from '../hooks/useUserProfile';
 
 const frameBg = require('../assets/logo/Frameimg.png');
+
+function displayFirstName(name: string | undefined): string {
+  if (!name?.trim()) {
+    return 'there';
+  }
+  return name.trim().split(/\s+/)[0] ?? 'there';
+}
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -33,6 +41,8 @@ type MenuItem = {
 };
 
 const HomeScreen = ({ navigation }: Props) => {
+  const { user } = useUserProfile();
+
   useFocusEffect(
     React.useCallback(() => {
       navigation.setOptions({ headerShown: false });
@@ -75,7 +85,9 @@ const HomeScreen = ({ navigation }: Props) => {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>Hi Johnson,</Text>
+            <Text style={styles.greeting}>
+              Hi {displayFirstName(user?.name)},
+            </Text>
             <Text style={styles.subGreeting}>Welcome back</Text>
           </View>
 

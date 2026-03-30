@@ -8,6 +8,7 @@ import {
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../navigation/RootStackParamList';
+import { getToken } from '../utils/tokenStorage';
 import Logo from '../assets/logo/logo.svg';
 import SpText from '../assets/icons/spText.svg';
 
@@ -19,10 +20,19 @@ type Props = {
 
 const SpalshScreen = ({ navigation }: Props) => {
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.replace('Welcome');
-    }, 2500);
-    return () => clearTimeout(timer);
+    let cancelled = false;
+    const run = async () => {
+      const token = await getToken();
+      await new Promise<void>((resolve) => setTimeout(resolve, 2500));
+      if (cancelled) {
+        return;
+      }
+      navigation.replace(token ? 'Home' : 'Welcome');
+    };
+    run();
+    return () => {
+      cancelled = true;
+    };
   }, [navigation]);
 
   return (

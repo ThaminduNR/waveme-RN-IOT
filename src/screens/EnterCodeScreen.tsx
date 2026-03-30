@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    Alert,
     KeyboardAvoidingView,
     Platform,
     ScrollView,
@@ -7,20 +8,46 @@ import {
     Text,
     View,
 } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {
+    NavigationProp,
+    RouteProp,
+    useNavigation,
+    useRoute,
+} from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/RootStackParamList';
 import CommonHeader from '../components/CommonHeader';
 import CommonTextInput from '../components/TextInput';
 import CommonButton from '../components/CommonButton';
+import { verifyResetCode } from '../services/authService';
+import { getErrorMessage } from '../utils/apiError';
+
+type EnterCodeRouteProp = RouteProp<RootStackParamList, 'EnterCode'>;
 
 const EnterCodeScreen = () => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const route = useRoute<EnterCodeRouteProp>();
+    const email = route.params.email;
     const [code, setCode] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const handleContinue = () => {
-        // TODO: validate code and submit to backend
-        // Then navigate to EnterNewPassword screen
-        navigation.navigate('EnterNewPassword');
+    const handleContinue = async () => {
+        const trimmed = code.trim();
+        if (!trimmed) {
+            Alert.alert('Missing code', 'Please enter the code from your email.');
+            return;
+        }
+        if (loading) {
+            return;
+        }
+        setLoading(true);
+        try {
+            await verifyResetCode(email, trimmed);
+            navigation.navigate('EnterNewPassword', { email, code: trimmed });
+        } catch (e) {
+            Alert.alert('Invalid code', getErrorMessage(e));
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -53,7 +80,11 @@ const EnterCodeScreen = () => {
                     <View style={styles.spacer} />
 
                     <View style={styles.buttonWrap}>
-                        <CommonButton title="Continue" variant="gradient" onPress={handleContinue} />
+                        <CommonButton
+                        title={loading ? 'Verifying…' : 'Continue'}
+                        variant="gradient"
+                        onPress={handleContinue}
+                    />
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>

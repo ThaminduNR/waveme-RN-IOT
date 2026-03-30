@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -7,25 +8,64 @@ import {
   Text,
   View,
 } from 'react-native';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/RootStackParamList';
 import CommonHeader from '../components/CommonHeader';
 import CommonTextInput from '../components/TextInput';
 import CommonButton from '../components/CommonButton';
+import { resetPassword } from '../services/authService';
+import { getErrorMessage } from '../utils/apiError';
+
+type EnterNewPasswordRouteProp = RouteProp<RootStackParamList, 'EnterNewPassword'>;
 
 const EnterNewPasswordScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const route = useRoute<EnterNewPasswordRouteProp>();
+  const { email, code } = route.params;
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleContinue = () => {
-    // TODO: validate passwords match and meet requirements
-    // TODO: submit new password to backend
-    // Then navigate to Login or Home
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Login' }],
-    });
+  const handleContinue = async () => {
+    if (!newPassword || !confirmPassword) {
+      Alert.alert('Missing fields', 'Please enter and confirm your new password.');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      Alert.alert('Mismatch', 'Passwords do not match.');
+      return;
+    }
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    try {
+      await resetPassword({
+        email,
+        code,
+        newPassword,
+        confirmPassword,
+      });
+      Alert.alert('Success', 'Your password has been reset.', [
+        {
+          text: 'OK',
+          onPress: () =>
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Login' }],
+            }),
+        },
+      ]);
+    } catch (e) {
+      Alert.alert('Reset failed', getErrorMessage(e));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -66,7 +106,11 @@ const EnterNewPasswordScreen = () => {
           <View style={styles.spacer} />
 
           <View style={styles.buttonWrap}>
-            <CommonButton title="Continue" variant="gradient" onPress={handleContinue} />
+            <CommonButton
+            title={loading ? 'Saving…' : 'Continue'}
+            variant="gradient"
+            onPress={handleContinue}
+          />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

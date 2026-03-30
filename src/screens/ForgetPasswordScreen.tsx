@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    Alert,
     KeyboardAvoidingView,
     Platform,
     ScrollView,
@@ -12,15 +13,42 @@ import { RootStackParamList } from '../navigation/RootStackParamList';
 import CommonHeader from '../components/CommonHeader';
 import CommonTextInput from '../components/TextInput';
 import CommonButton from '../components/CommonButton';
+import { forgotPassword } from '../services/authService';
+import { getErrorMessage } from '../utils/apiError';
 
 const ForgetPasswordScreen = () => {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const handleContinue = () => {
-        // TODO: validate email and submit to backend
-        // Then navigate to EnterCode screen
-        navigation.navigate('EnterCode');
+    const handleContinue = async () => {
+        const trimmed = email.trim();
+        if (!trimmed) {
+            Alert.alert('Missing email', 'Please enter your email address.');
+            return;
+        }
+        if (loading) {
+            return;
+        }
+        setLoading(true);
+        try {
+            await forgotPassword(trimmed);
+            Alert.alert(
+                'Check your email',
+                'Check your email for reset code',
+                [
+                    {
+                        text: 'OK',
+                        onPress: () =>
+                            navigation.navigate('EnterCode', { email: trimmed }),
+                    },
+                ],
+            );
+        } catch (e) {
+            Alert.alert('Request failed', getErrorMessage(e));
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -54,7 +82,11 @@ const ForgetPasswordScreen = () => {
                     <View style={styles.spacer} />
 
                     <View style={styles.buttonWrap}>
-                        <CommonButton title="Continue" variant="gradient" onPress={handleContinue} />
+                        <CommonButton
+                        title={loading ? 'Sending…' : 'Continue'}
+                        variant="gradient"
+                        onPress={handleContinue}
+                    />
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>
